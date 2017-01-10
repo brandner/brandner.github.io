@@ -1,26 +1,50 @@
 <html>
 <head>
 	<title>Mayfly</title>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/LoadGo/2.1/loadgo.min.js"></script>
+		
+	<style>
+	.prog {
+	    width:300px;
+	    height:141px;
+	    border:0px solid black;
+	    background-image: url("mayfly.png");
+	    background-size: 300px 141px;
+	}
+	.filler {
+	    width:0%;
+	    height:141px;
+	    background-color:red;
+	    background-image: url("mayfly.png");
+	    background-size: 300px 141px;
+	}
+	</style>
 	
-	<script>
-	$( document ).ready(function() {
-		$('#mayfly').loadgo({
-			'opacity': 1,
-			'image': 'mayfly-white.png'
-		});
-		setTimeout(function(){
-			$('#mayfly').loadgo('setprogress', 50);
-		}, 500);
-	});
-	</script>
 </head>
 <body>
 
-<div>
-<img id="mayfly" src="mayfly-red.png" alt="Mayfly" width="300" />
+<div class="prog">
+<div id="filler" class="filler"></div>
 </div>
+
+<script>
+	var stepSize = 50;
+	setTimeout((function() {
+	    var filler = document.getElementById("filler"),
+	        percentage = 0;
+	    return function progress() {
+	        filler.style.width = percentage + "%";
+	        percentage +=1;
+	        if (percentage <= 100) {
+	            setTimeout(progress, stepSize);
+	        } else if (percentage >= 100) {
+	        	percentage = 0;
+	        	filler.style.width = percentage + "%";
+	            setTimeout(progress, stepSize);
+	        }
+	    }
+	    
+	}()), stepSize);
+</script>
 
 
 </body>
