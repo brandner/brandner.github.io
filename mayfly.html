@@ -1,0 +1,27 @@
+<html>
+<head>
+	<title>Mayfly</title>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/LoadGo/2.1/loadgo.min.js"></script>
+	
+	<script>
+	$( document ).ready(function() {
+		$('#mayfly').loadgo({
+			'opacity': 1,
+			'image': 'mayfly-white.png'
+		});
+		setTimeout(function(){
+			$('#mayfly').loadgo('setprogress', 50);
+		}, 500);
+	});
+	</script>
+</head>
+<body>
+
+<div>
+<img id="mayfly" src="mayfly-red.png" alt="Mayfly" width="300" />
+</div>
+
+
+</body>
+</html>
