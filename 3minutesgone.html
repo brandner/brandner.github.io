@@ -22,8 +22,8 @@
 	
 	<!-- three things for each lifeform
 	1. Set the background image below - a square image approx 186x186 px
-	2. Copy and paste the HTML for the lifeform including settings for data-lifeform and data-life-wasted
-	3. Add the three required JS lines
+	2. Copy and paste the HTML for the lifeform including headings and text
+	3. Be sure to set properties on timeline 'progress' item including data-lifeform and data-life-wasted
 	// -->
 	
 	<!-- set background images here -->
@@ -33,28 +33,12 @@
 		.ant { background-image: url("mayfly-sq.png"); }
 	</style>
 	
-	<!-- script lifeforms here -->
+	<!-- basic settings -->
 	<script>
-		<!-- basic settings -->
-		var msBetweenExpand = 100;
-		var startPercent = 0;
-		var loopExpand = 0;
-		$( document ).ready(function() {
-			// required script for mayfly
-			lifeformElement = $('.progress.mayfly')[0];
-			lifeformWasted = $('.progress.mayfly').data("lifeWasted");
-			progress(lifeformElement, startPercent, msBetweenExpand, lifeformWasted, loopExpand);
-			
-			// required script for mealmoth
-			lifeformElement = $('.progress.mealmoth')[0];
-			lifeformWasted = $('.progress.mealmoth').data("lifeWasted");
-			progress(lifeformElement, startPercent, msBetweenExpand, lifeformWasted, loopExpand);
-
-			// required script for ant
-			lifeformElement = $('.progress.ant')[0];
-			lifeformWasted = $('.progress.ant').data("lifeWasted");
-			progress(lifeformElement, startPercent, msBetweenExpand, lifeformWasted, loopExpand);
-		});
+		var msBetweenExpand = 100; // lower is faster
+		var stepPercent = 2; // smaller is smoother
+		var startPercent = 0; // 0 starts out with no fill
+		var loopExpand = 0; // 1 means it loops
 	</script>
 	
 </head>
@@ -76,8 +60,7 @@
           </div>
           <div class="timeline-panel">
             <div class="timeline-heading">
-              <h4>Mayfly</h4>
-              <h4 class="subheading">Subtitle</h4>
+              <h4>Mayfly</h4><h4 class="subheading">Subtitle</h4>
             </div>
             <div class="timeline-body">
               <p class="text-muted">
@@ -95,8 +78,7 @@
 		  </div>
           <div class="timeline-panel">
             <div class="timeline-heading">
-              <h4>Meal Moth</h4>
-              <h4 class="subheading">Subtitle</h4>
+              <h4>Meal Moth</h4><h4 class="subheading">Subtitle</h4>
             </div>
             <div class="timeline-body">
               <p class="text-muted">
@@ -114,8 +96,7 @@
           </div>
           <div class="timeline-panel">
             <div class="timeline-heading">
-              <h4>Red Velvet Ant</h4>
-              <h4 class="subheading">Subtitle</h4>
+              <h4>Red Velvet Ant</h4><h4 class="subheading">Subtitle</h4>
             </div>
             <div class="timeline-body">
               <p class="text-muted">
@@ -129,6 +110,18 @@
     </div>
   </div>
 </div>
+
+<script>
+	<!-- DO NOT TOUCH - this is where the expanding/filling is triggered -->
+	$( document ).ready(function() {
+		$('.progress').each(function() {
+			lifeform = $(this).data("lifeform");
+			lifeformElement = $('.progress.' + lifeform)[0];
+			lifeformWasted = $('.progress.' + lifeform).data("lifeWasted");
+			progress(lifeformElement, startPercent, msBetweenExpand, stepPercent, lifeformWasted, loopExpand);
+		});
+	});
+</script>
 
 </body>
 </html>
