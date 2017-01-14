@@ -1,51 +1,64 @@
 <html>
 <head>
 	<title>3minutesgone</title>
+	<!-- pick a good title -->
+	<!-- search engine keywords, author and description -->
+	<meta name="description" content="3minutesgone description">
+    <meta name="author" content="Skinny at @3minutesgone">
+    <meta name="keywords" content="three,minutes,gone">
+    
+    <!-- facebook title, thumbname and description -->
+    <meta property="og:title" content="3minutesgone"> 
+	<meta property="og:image" content="link_to_image">
+	<meta property="og:description" content="description goes here">
 	
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<!-- DO NOT TOUCH - libraries to build page -->
+	<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.css">
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="timeline.css">
 	<link rel="stylesheet" href="3minutesgone.css">
+	<script type="text/javascript" src="3minutesgone.js"></script>
 	
+	<!-- three things for each lifeform
+	1. Set the background image below - a square image approx 186x186 px
+	2. Copy and paste the HTML for the lifeform including settings for data-lifeform and data-life-wasted
+	3. Add the three required JS lines
+	// -->
+	
+	<!-- set background images here -->
 	<style>
-	.life {
-	    width:300px;
-	    height:141px;
-	    border:0px solid black;
-	    background-image: url("mayfly.png");
-	    background-size: 300px 141px;
-	}
-	.progress {
-	    width:0%;
-	    height:141px;
-	    background-color:red;
-	    background-image: url("mayfly.png");
-	    background-size: 300px 141px;
-	}
+		.mayfly { background-image: url("mayfly-sq.png"); }
+		.mealmoth { background-image: url("mayfly-sq.png"); }
+		.ant { background-image: url("mayfly-sq.png"); }
 	</style>
+	
+	<!-- script lifeforms here -->
+	<script>
+		<!-- basic settings -->
+		var msBetweenExpand = 100;
+		var startPercent = 0;
+		var loopExpand = 0;
+		$( document ).ready(function() {
+			// required script for mayfly
+			lifeformElement = $('.progress.mayfly')[0];
+			lifeformWasted = $('.progress.mayfly').data("lifeWasted");
+			progress(lifeformElement, startPercent, msBetweenExpand, lifeformWasted, loopExpand);
+			
+			// required script for mealmoth
+			lifeformElement = $('.progress.mealmoth')[0];
+			lifeformWasted = $('.progress.mealmoth').data("lifeWasted");
+			progress(lifeformElement, startPercent, msBetweenExpand, lifeformWasted, loopExpand);
+
+			// required script for ant
+			lifeformElement = $('.progress.ant')[0];
+			lifeformWasted = $('.progress.ant').data("lifeWasted");
+			progress(lifeformElement, startPercent, msBetweenExpand, lifeformWasted, loopExpand);
+		});
+	</script>
 	
 </head>
 <body>
-
-<script>
-	var stepSize = 50;
-	setTimeout((function() {
-	    var filler = document.getElementById("filler"),
-	        percentage = 0;
-	    return function progress() {
-	        filler.style.width = percentage + "%";
-	        percentage +=1;
-	        if (percentage <= 100) {
-	            setTimeout(progress, stepSize);
-	        } else if (percentage >= 100) {
-	        	percentage = 0;
-	        	filler.style.width = percentage + "%";
-	            setTimeout(progress, stepSize);
-	        }
-	    }
-	    
-	}()), stepSize);
-</script>
-
 
 <div class="container">
   <div class="row">
@@ -57,7 +70,9 @@
       <ul class="timeline">
         <li>
           <div class="timeline-image">
-            <img class="img-circle img-responsive" id="img1" src="mayfly-sq.png" alt="">
+          	<div class="life mayfly img-circle">
+				<div class="progress mayfly img-circle" data-lifeform="mayfly" data-life-wasted="70"></div>
+			</div>
           </div>
           <div class="timeline-panel">
             <div class="timeline-heading">
@@ -74,16 +89,18 @@
         </li>
         <li class="timeline-inverted">
           <div class="timeline-image">
-            <img class="img-circle img-responsive" id="img2" src="mayfly-sq.png" alt="">
-          </div>
+            <div class="life mealmoth img-circle">
+				<div class="progress mealmoth img-circle" data-lifeform="mealmoth" data-life-wasted="5"></div>
+			</div>
+		  </div>
           <div class="timeline-panel">
             <div class="timeline-heading">
-              <h4>Mayfly</h4>
+              <h4>Meal Moth</h4>
               <h4 class="subheading">Subtitle</h4>
             </div>
             <div class="timeline-body">
               <p class="text-muted">
-                Mayfly ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                Meal Moth ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
               </p>
             </div>
           </div>
@@ -91,16 +108,18 @@
         </li>
         <li>
           <div class="timeline-image">
-            <img class="img-circle img-responsive" id="img3" src="mayfly-sq.png" alt="">
+          	<div class="life ant img-circle">
+				<div class="progress ant img-circle" data-lifeform="ant" data-life-wasted="2"></div>
+			</div>
           </div>
           <div class="timeline-panel">
             <div class="timeline-heading">
-              <h4>Mayfly</h4>
+              <h4>Red Velvet Ant</h4>
               <h4 class="subheading">Subtitle</h4>
             </div>
             <div class="timeline-body">
               <p class="text-muted">
-                Mayfly ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                Red Velvet Ant ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
               </p>
             </div>
           </div>
@@ -110,7 +129,6 @@
     </div>
   </div>
 </div>
-
 
 </body>
 </html>
